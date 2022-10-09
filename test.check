@@ -1,0 +1,93 @@
+#include "s21_math.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#test s21_abs_test
+for (int i = -20; i < 5; i++) {
+    ck_assert_int_eq(abs(i), s21_abs(i));
+}
+
+#test s21_acos_test
+for (double i = -1; i < 0.99; i += 0.01) {
+    ck_assert_double_eq_tol(acos(i), s21_acos(i), 1e-6);
+}
+ck_assert_double_eq_tol(acos(1), s21_acos(1), 1e-6);
+
+#test s21_asin_test
+for (double i = -1; i < 1.0; i += 0.01) {
+    ck_assert_double_eq_tol(asin(i), s21_asin(i), 1e-6);
+}
+ck_assert_double_eq_tol(asin(1), s21_asin(1), 1e-6);
+
+#test s21_atan_test
+for (double i = -0.99; i < 0.99; i += 0.1) {
+    ck_assert_double_eq_tol(atan(i), s21_atan(i), 1e-6);
+}
+
+#test s21_ceil_test
+for (double i = -20.0; i < 5.0; i += 0.1) {
+    ck_assert_double_eq_tol(ceil(i), s21_ceil(i), 1e-6);
+}
+
+#test s21_cos_test
+for (double i = -180.0; i < 95.0; i += 1.1) {
+    ck_assert_double_eq_tol(cos(i), s21_cos(i), 1e-6);
+}
+
+#test s21_exp_test
+for (double i = -20.0; i < 20.0; i += 0.1) {
+    ck_assert_int_eq((long long)(exp(i) * 100000), (long long)(s21_exp(i) * 100000));
+}
+ck_assert_double_eq_tol(exp(0.0000000000001), s21_exp(0.0000000000001), 1e-6);
+
+#test s21_fabs_test
+for (double i = -20.0; i < 5.0; i += 0.1) {
+    ck_assert_double_eq_tol(fabs(i), s21_fabs(i), 1e-6);
+}
+
+#test s21_floor_test
+for (double i = -20.0; i < 5.0; i += 0.1) {
+    ck_assert_double_eq_tol(floor(i), s21_floor(i), 1e-6);
+}
+
+#test s21_fmod_test
+for (double i = -20.0; i < 5.0; i += 0.1) {
+    ck_assert_double_eq_tol(fmod(i, 0.05), s21_fmod(i, 0.05), 1e-6);
+}
+ck_assert_float_nan(s21_fmod(0.0, 0.0));
+ck_assert_float_infinite(s21_fmod(1.0, 0.0));
+ck_assert_float_infinite(s21_fmod(-1.0, 0.0));
+ ck_assert_double_eq_tol(fmod(0.2, 0.1), s21_fmod(0.2, 0.1), 1e-6);
+
+#test s21_log_test
+for (double i = 0.1; i < 20; i += 0.1) {
+    ck_assert_double_eq_tol(log(i), s21_log(i), 1e-6);
+}
+ck_assert_ldouble_nan(s21_log(-1));
+ck_assert_double_eq_tol(log(10000), s21_log(10000), 1e-6);
+
+#test s21_pow_test
+for (double i = -10.0; i < 10.0; i += 0.1) {
+    ck_assert_double_eq_tol(pow(5, i), s21_pow(5, i), 1e-6);
+}
+ck_assert_double_eq_tol(pow(5, 0), s21_pow(5, 0), 1e-6);
+ck_assert_double_eq_tol(pow(0, 2), s21_pow(0, 2), 1e-6);
+
+#test s21_sin_test
+for (double i = -180.0; i < 90.0; i += 1.1) {
+    ck_assert_double_eq_tol(sin(i), s21_sin(i), 1e-6);
+}
+
+#test s21_sqrt_test
+for (double i = 1; i < 10.0; i += 0.1) {
+    ck_assert_double_eq_tol(sqrt(i), s21_sqrt(i), 1e-6);
+}
+ck_assert_double_eq_tol(sqrt(0), s21_sqrt(0), 1e-6);
+ck_assert_ldouble_nan(s21_sqrt(-1));
+
+#test s21_tan_test
+for (double i = -92.0; i < 95.0; i += 1.1) {
+    ck_assert_double_eq_tol(tan(i), s21_tan(i), 1e-6);
+}
+ck_assert_double_eq_tol(tan(90), s21_tan(90), 1e-6);
